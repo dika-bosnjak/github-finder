@@ -5,3 +5,5 @@ This App uses Github REST API to retrieve data from Github and provides the func
 It is developed using React and Tailwind UI created by Hassib Moddasser.
 
 Axios (promise based HTTP client that makes it easy to send asynchronous HTTP requests) is used to fetch data from Github api.
+
+Try this application on link: https://github-finder-db.vercel.app/
