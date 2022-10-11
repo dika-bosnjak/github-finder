@@ -2,6 +2,7 @@
 import { FaHome } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
+//Not found page displays 404 page not found message
 function NotFound() {
   return (
     <div className='hero'>

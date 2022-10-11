@@ -1,3 +1,4 @@
+//reducer takes state and the action, according to the action type, it returns props values
 const alertReducer = (state, action) => {
   switch (action.type) {
     case "SET_ALERT":

@@ -1,5 +1,6 @@
 import React from 'react'
 
+//About page gives the basic info about app
 function About() {
   return (
     <>

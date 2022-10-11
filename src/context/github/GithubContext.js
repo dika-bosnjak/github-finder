@@ -1,61 +1,26 @@
 import { createContext, useReducer } from "react";
 import githubReducer from "./GithubReducer";
 
+//GithubContext offers a method to ease passing props from parent to child components
 const GithubContext = createContext();
-
-const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
+    user: {},
+    repos: [],
     loading: false,
   };
 
+  //reducer is used to take the current state and an action as arguments, and it returns a new state result
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  //set loading
-  const setLoading = () =>
-    dispatch({
-      type: "SET_LOADING",
-    });
-
-  //get search users
-  const searchUsers = async (text) => {
-    setLoading();
-
-    const params = new URLSearchParams({
-      q: text,
-    });
-
-    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
-
-    const { items } = await response.json();
-
-    dispatch({
-      type: "GET_USERS",
-      payload: items,
-    });
-  };
-
-  // clear users
-  const clearUsers = () => {
-    dispatch({
-      type: "CLEAR_USERS",
-    });
-  };
-
+  //GithubContext provider shares state and dispatch with its children
   return (
     <GithubContext.Provider
       value={{
-        users: state.users,
-        loading: state.loading,
-        searchUsers,
-        clearUsers,
+        ...state,
+        dispatch,
       }}
     >
       {children}
